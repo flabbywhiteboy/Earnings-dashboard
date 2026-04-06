@@ -1,0 +1,6 @@
+{
+  "name": "Stock Watchlist",
+  "short_name": "Watchlist",
+  "start_url": "./index.html",
+  "display": "standalone"
+}

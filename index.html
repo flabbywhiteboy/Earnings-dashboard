@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Watchlist</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>Stock Watchlist</h1>
+      <p class="subtitle">Owned holdings and watchlist ideas</p>
+    </header>
+
+    <section class="controls">
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="owned">Owned</button>
+        <button class="filter-btn" data-filter="watchlist">Watchlist</button>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div>Total: <span id="totalCount">0</span></div>
+      <div>Owned: <span id="ownedCount">0</span></div>
+      <div>Watchlist: <span id="watchlistCount">0</span></div>
+    </section>
+
+    <main id="cardList"></main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

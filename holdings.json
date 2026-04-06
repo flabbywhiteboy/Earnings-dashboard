@@ -1,0 +1,250 @@
+[
+  {
+    "ticker": "MU",
+    "name": "Micron Technology",
+    "category": "watchlist",
+    "ir_page": "https://investors.micron.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "ATZ.TO",
+    "name": "Aritzia",
+    "category": "portfolio",
+    "ir_page": "https://investors.aritzia.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "ACN",
+    "name": "Accenture",
+    "category": "portfolio",
+    "ir_page": "https://investor.accenture.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "AMZN",
+    "name": "Amazon",
+    "category": "portfolio",
+    "ir_page": "https://www.aboutamazon.com/investor-relations",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "AAPL",
+    "name": "Apple",
+    "category": "portfolio",
+    "ir_page": "https://investor.apple.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "CEG",
+    "name": "Constellation Energy",
+    "category": "portfolio",
+    "ir_page": "https://investors.constellationenergy.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "COIN",
+    "name": "Coinbase",
+    "category": "portfolio",
+    "ir_page": "https://investor.coinbase.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "CRWD",
+    "name": "CrowdStrike",
+    "category": "portfolio",
+    "ir_page": "https://ir.crowdstrike.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "DIS",
+    "name": "Disney",
+    "category": "portfolio",
+    "ir_page": "https://thewaltdisneycompany.com/investor-relations/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "EUAD",
+    "name": "Select STOXX Europe Aerospace & Defense ETF",
+    "category": "portfolio",
+    "ir_page": null,
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "GOOGL",
+    "name": "Alphabet",
+    "category": "portfolio",
+    "ir_page": "https://abc.xyz/investor/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "GDX",
+    "name": "VanEck Gold Miners ETF",
+    "category": "portfolio",
+    "ir_page": null,
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "LIF",
+    "name": "Life360",
+    "category": "portfolio",
+    "ir_page": "https://investors.life360.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "MCD",
+    "name": "McDonald's",
+    "category": "portfolio",
+    "ir_page": "https://corporate.mcdonalds.com/corpmcd/investors.html",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft",
+    "category": "portfolio",
+    "ir_page": "https://www.microsoft.com/en-us/investor",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "NET",
+    "name": "Cloudflare",
+    "category": "portfolio",
+    "ir_page": "https://cloudflare.net/investors",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA",
+    "category": "portfolio",
+    "ir_page": "https://investor.nvidia.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "PYPL",
+    "name": "PayPal",
+    "category": "portfolio",
+    "ir_page": "https://investor.pypl.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "RKLB",
+    "name": "Rocket Lab",
+    "category": "portfolio",
+    "ir_page": "https://investors.rocketlabusa.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "S",
+    "name": "SentinelOne",
+    "category": "portfolio",
+    "ir_page": "https://investors.sentinelone.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "URA",
+    "name": "Global X Uranium ETF",
+    "category": "portfolio",
+    "ir_page": null,
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "V",
+    "name": "Visa",
+    "category": "portfolio",
+    "ir_page": "https://investor.visa.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "LVMUY",
+    "name": "LVMH ADR",
+    "category": "portfolio",
+    "ir_page": "https://www.lvmh.com/investors/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "A2M.AX",
+    "name": "A2 Milk",
+    "category": "portfolio",
+    "ir_page": "https://thea2milkcompany.com/investors/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "HGH.NZ",
+    "name": "Heartland Group Holdings",
+    "category": "portfolio",
+    "ir_page": "https://www.heartlandgroup.info/investor-centre",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "CCR.AX",
+    "name": "Credit Clear",
+    "category": "portfolio",
+    "ir_page": "https://www.creditclear.com.au/investors/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "CSL.AX",
+    "name": "CSL",
+    "category": "portfolio",
+    "ir_page": "https://www.csl.com/investors",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "MQG.AX",
+    "name": "Macquarie Group",
+    "category": "portfolio",
+    "ir_page": "https://www.macquarie.com/au/en/investors.html",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "RMD.AX",
+    "name": "ResMed",
+    "category": "portfolio",
+    "ir_page": "https://investor.resmed.com/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "SIG.AX",
+    "name": "Sigma Healthcare (Chemist Warehouse)",
+    "category": "portfolio",
+    "ir_page": "https://investors.sigmahealthcare.com.au/",
+    "webcast_url": null,
+    "price_target": null
+  },
+  {
+    "ticker": "XRO.AX",
+    "name": "Xero",
+    "category": "portfolio",
+    "ir_page": "https://www.xero.com/nz/about/investors/",
+    "webcast_url": null,
+    "price_target": null
+  }
+]
