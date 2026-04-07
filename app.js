@@ -18,8 +18,9 @@ const FINNHUB_BASE = "https://finnhub.io/api/v1";
 const STORAGE_KEY = "stock-watchlist-finnhub-key";
 
 const marketSymbolMap = {
-  "A2M": "NZX:A2M",
+  "A2M": "ASX:A2M",
   "CCR": "ASX:CCR",
+  "CSL": "ASX:CSL",
   "EUAD": "LSE:EUAD",
   "HGH": "NZX:HGH",
   "SIG": "ASX:SIG"
@@ -242,49 +243,7 @@ async function refreshLiveData() {
   refreshBtn.disabled = false;
   setStatus("Refresh finished.");
 }
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    setStatus("Add your Finnhub API key and tap Save key.");
-    return;
-  }
-
-  setStatus("Refreshing live prices and earnings dates...");
-  refreshBtn.disabled = true;
-
-  const nextLiveData = {};
-
-  for (let i = 0; i < stocks.length; i++) {
-    const item = stocks[i];
-    const symbol = resolveSymbol(item);
-
-    try {
-      const [quote, earningsDate] = await Promise.all([
-        fetchQuote(symbol, apiKey),
-        fetchEarnings(symbol, apiKey)
-      ]);
-
-      nextLiveData[item.ticker] = { quote, earningsDate, sourceSymbol: symbol };
-      setStatus(`Loaded ${i + 1} of ${stocks.length}: ${item.ticker}`);
-    } catch (err) {
-      nextLiveData[item.ticker] = {
-        quote: {},
-        earningsDate: null,
-        sourceSymbol: symbol,
-        error: err.message
-      };
-      setStatus(`Loaded ${i + 1} of ${stocks.length}, with some gaps.`);
-    }
-
-    renderCards();
-    await new Promise(r => setTimeout(r, 250));
-  }
-
-  liveData = nextLiveData;
-  renderCards();
-  refreshBtn.disabled = false;
-  setStatus("Refresh finished.");
-}
-
+ 
 searchInput.addEventListener("input", renderCards);
 
 filterButtons.forEach(button => {
