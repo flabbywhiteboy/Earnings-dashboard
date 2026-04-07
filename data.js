@@ -15,12 +15,12 @@ const stocks = [
   { ticker: "URA", company: "Global X Uranium ETF", market: "NYSEARCA ETF", status: "owned", notes: "Uranium ETF exposure." },
   { ticker: "V", company: "Visa", market: "NYSE", status: "owned", notes: "Payments network." },
   { ticker: "LVMUY", company: "LVMH", market: "OTC", status: "owned", notes: "Luxury goods exposure." },
+  { ticker: "MQG", company: "Macquarie Group", market: "ASX", status: "owned", notes: "Core diversified financial holding." },
+  { ticker: "XRO", company: "Xero", market: "ASX", status: "owned", notes: "Cloud accounting software holding." },
   { ticker: "A2M", company: "The a2 Milk Company", market: "ASX", status: "owned", notes: "ASX-listed holding." },
   { ticker: "HGH", company: "Heartland Group", market: "NZX", status: "owned", notes: "Heartland Group Holdings." },
   { ticker: "CCR", company: "Credit Clear", market: "ASX", status: "owned", notes: "Smaller cap holding." },
   { ticker: "CSL", company: "CSL", market: "ASX", status: "owned", notes: "Healthcare / biotech holding." },
   { ticker: "MU", company: "Micron Technology", market: "NASDAQ", status: "watchlist", notes: "Current watchlist company." },
   { ticker: "SIG", company: "Sigma Healthcare", market: "ASX", status: "watchlist", notes: "Interested in adding if price drops." }
-  { ticker: "MQG", company: "Macquarie Group", market: "ASX", status: "owned", notes: "Core diversified financial holding." },
-  { ticker: "XRO", company: "Xero", market: "ASX", status: "owned", notes: "Cloud accounting software holding." },
 ];
