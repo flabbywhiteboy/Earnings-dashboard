@@ -204,6 +204,59 @@ async function refreshLiveData() {
     const item = stocks[i];
     const symbol = resolveSymbol(item);
 
+    let quote = {};
+    let earningsDate = null;
+    let error = null;
+
+    try {
+      quote = await fetchQuote(symbol, apiKey);
+    } catch (err) {
+      error = `Quote failed: ${err.message}`;
+      console.error("Quote error for", symbol, err);
+    }
+
+    try {
+      earningsDate = await fetchEarnings(symbol, apiKey);
+    } catch (err) {
+      error = error
+        ? error + ` | Earnings failed: ${err.message}`
+        : `Earnings failed: ${err.message}`;
+      console.error("Earnings error for", symbol, err);
+    }
+
+    nextLiveData[item.ticker] = {
+      quote,
+      earningsDate,
+      sourceSymbol: symbol,
+      error
+    };
+
+    liveData = nextLiveData;
+    renderCards();
+
+    setStatus(`Loaded ${i + 1} of ${stocks.length}: ${item.ticker}`);
+
+    await new Promise(r => setTimeout(r, 1200));
+  }
+
+  refreshBtn.disabled = false;
+  setStatus("Refresh finished.");
+}
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    setStatus("Add your Finnhub API key and tap Save key.");
+    return;
+  }
+
+  setStatus("Refreshing live prices and earnings dates...");
+  refreshBtn.disabled = true;
+
+  const nextLiveData = {};
+
+  for (let i = 0; i < stocks.length; i++) {
+    const item = stocks[i];
+    const symbol = resolveSymbol(item);
+
     try {
       const [quote, earningsDate] = await Promise.all([
         fetchQuote(symbol, apiKey),
@@ -246,11 +299,11 @@ filterButtons.forEach(button => {
 saveApiKeyBtn.addEventListener("click", saveApiKey);
 refreshBtn.addEventListener("click", refreshLiveData);
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
-  });
-}
+// if ("serviceWorker" in navigator) {
+//  window.addEventListener("load", () => {
+//    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+//  });
+// }
 
 apiKeyInput.value = getApiKey();
 renderCards();
