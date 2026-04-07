@@ -307,3 +307,5 @@ refreshBtn.addEventListener("click", refreshLiveData);
 
 apiKeyInput.value = getApiKey();
 renderCards();
+
+setInterval(refreshLiveData, 60000);
