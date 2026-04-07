@@ -1,6 +1,9 @@
 {
-  "name": "Stock Watchlist",
+  "name": "Stock Watchlist Pro",
   "short_name": "Watchlist",
   "start_url": "./index.html",
-  "display": "standalone"
+  "display": "standalone",
+  "background_color": "#eef2f6",
+  "theme_color": "#1f6feb",
+  "icons": []
 }

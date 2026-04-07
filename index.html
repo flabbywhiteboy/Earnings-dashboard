@@ -3,33 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stock Watchlist</title>
+  <title>Stock Watchlist Pro</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
+  <div class="app-shell">
     <header class="topbar">
-      <h1>Stock Watchlist</h1>
-      <p class="subtitle">Owned holdings and watchlist ideas</p>
+      <div>
+        <h1>Stock Watchlist Pro</h1>
+        <p class="subtitle">Live prices, earnings dates, owned holdings and watchlist</p>
+      </div>
+      <button id="refreshBtn" class="primary-btn">Refresh</button>
     </header>
 
-    <section class="controls">
-      <input type="text" id="searchInput" placeholder="Search..." />
+    <section class="panel">
+      <div class="api-row">
+        <div class="field grow">
+          <label for="apiKeyInput">Finnhub API key</label>
+          <input id="apiKeyInput" type="password" placeholder="Paste your API key here" />
+        </div>
+        <button id="saveApiKeyBtn" class="secondary-btn">Save key</button>
+      </div>
+      <p class="help-text">
+        Your key is stored only in this browser on this device. Nothing is sent anywhere except Finnhub when you refresh data.
+      </p>
+    </section>
+
+    <section class="panel controls">
+      <div class="field">
+        <label for="searchInput">Search</label>
+        <input id="searchInput" type="text" placeholder="Search company, ticker, market, notes..." />
+      </div>
+
       <div class="filter-row">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="owned">Owned</button>
         <button class="filter-btn" data-filter="watchlist">Watchlist</button>
       </div>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-label">Total</div>
+          <div class="summary-value" id="totalCount">0</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Owned</div>
+          <div class="summary-value" id="ownedCount">0</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Watchlist</div>
+          <div class="summary-value" id="watchlistCount">0</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Upcoming earnings</div>
+          <div class="summary-value" id="upcomingCount">0</div>
+        </div>
+      </div>
     </section>
 
-    <section class="summary">
-      <div>Total: <span id="totalCount">0</span></div>
-      <div>Owned: <span id="ownedCount">0</span></div>
-      <div>Watchlist: <span id="watchlistCount">0</span></div>
-    </section>
-
-    <main id="cardList"></main>
+    <section id="statusBar" class="status-bar">Ready.</section>
+    <main id="cardList" class="card-list"></main>
   </div>
 
   <script src="data.js"></script>

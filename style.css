@@ -1,4 +1,266 @@
-body { font-family: Arial; padding: 10px; }
-.stock-card { border:1px solid #ccc; margin:10px 0; padding:10px; border-radius:8px; }
-.owned { border-left:5px solid green; }
-.watchlist { border-left:5px solid orange; }
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #eef2f6;
+  --panel: #ffffff;
+  --text: #163045;
+  --muted: #5f7387;
+  --line: #d7e1ea;
+  --blue: #1f6feb;
+  --green: #0f9d58;
+  --orange: #db8a00;
+  --red: #d93025;
+  --shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.app-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.panel, .status-bar, .stock-card {
+  background: var(--panel);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.status-bar {
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  color: var(--muted);
+}
+
+.api-row {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field.grow { flex: 1; }
+
+label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.help-text {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.primary-btn, .secondary-btn, .filter-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: var(--blue);
+  color: white;
+}
+
+.secondary-btn {
+  background: #dfeafe;
+  color: #0d4fb3;
+}
+
+.filter-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.filter-btn {
+  flex: 1;
+  background: #e9eef4;
+  color: var(--text);
+}
+
+.filter-btn.active {
+  background: var(--blue);
+  color: #fff;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.summary-card {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+}
+
+.summary-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stock-card {
+  padding: 14px;
+  border-left: 6px solid #cbd5df;
+}
+
+.stock-card.owned { border-left-color: var(--green); }
+.stock-card.watchlist { border-left-color: var(--orange); }
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.company {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.ticker-line {
+  color: var(--muted);
+  margin-top: 5px;
+  font-size: 0.95rem;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.badge.owned {
+  background: #def7e8;
+  color: #116b3c;
+}
+
+.badge.watchlist {
+  background: #fff1cc;
+  color: #8a5200;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.metric {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.metric-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.metric-value {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.metric-value.pos { color: var(--green); }
+.metric-value.neg { color: var(--red); }
+
+.notes {
+  margin-top: 12px;
+  color: #24435a;
+  line-height: 1.45;
+}
+
+.empty {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--panel);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.small-note {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 760px) {
+  .summary-grid, .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .topbar, .api-row, .card-head { flex-direction: column; }
+  .summary-grid, .metrics-grid { grid-template-columns: 1fr 1fr; }
+}
