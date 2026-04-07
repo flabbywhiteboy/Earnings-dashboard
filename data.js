@@ -1,9 +1,9 @@
 const stocks = [
   { ticker: "CRWD", company: "CrowdStrike", market: "NASDAQ", status: "owned", notes: "Cybersecurity holding." },
   { ticker: "DIS", company: "Disney", market: "NYSE", status: "owned", notes: "Media and entertainment." },
-  { ticker: "EUAD", company: "Future of Defence UCITS ETF", market: "ETF", status: "owned", notes: "European defence ETF." },
+  { ticker: "EUAD", company: "Future of Defence UCITS ETF", market: "LSE ETF", status: "owned", notes: "European defence ETF." },
   { ticker: "GOOGL", company: "Alphabet (Google)", market: "NASDAQ", status: "owned", notes: "Core large-cap tech holding." },
-  { ticker: "GDX", company: "VanEck Gold Miners ETF", market: "ETF", status: "owned", notes: "Gold miners ETF exposure." },
+  { ticker: "GDX", company: "VanEck Gold Miners ETF", market: "NYSEARCA ETF", status: "owned", notes: "Gold miners ETF exposure." },
   { ticker: "LIF", company: "Life360", market: "NASDAQ", status: "owned", notes: "Family safety/location platform." },
   { ticker: "MCD", company: "McDonald's", market: "NYSE", status: "owned", notes: "Global consumer brand." },
   { ticker: "MSFT", company: "Microsoft", market: "NASDAQ", status: "owned", notes: "Largest core tech holding." },
@@ -12,13 +12,13 @@ const stocks = [
   { ticker: "PYPL", company: "PayPal", market: "NASDAQ", status: "owned", notes: "Payments platform." },
   { ticker: "RKLB", company: "Rocket Lab", market: "NASDAQ", status: "owned", notes: "Small holding in space sector." },
   { ticker: "S", company: "SentinelOne", market: "NYSE", status: "owned", notes: "Cybersecurity holding." },
-  { ticker: "URA", company: "Global X Uranium ETF", market: "ETF", status: "owned", notes: "Uranium ETF exposure." },
+  { ticker: "URA", company: "Global X Uranium ETF", market: "NYSEARCA ETF", status: "owned", notes: "Uranium ETF exposure." },
   { ticker: "V", company: "Visa", market: "NYSE", status: "owned", notes: "Payments network." },
   { ticker: "LVMUY", company: "LVMH", market: "OTC", status: "owned", notes: "Luxury goods exposure." },
   { ticker: "A2M", company: "The a2 Milk Company", market: "ASX", status: "owned", notes: "ASX-listed holding." },
-  { ticker: "HGH", company: "Heartland Group", market: "ASX/NZX", status: "owned", notes: "Heartland Bank / Heartland Group." },
+  { ticker: "HGH", company: "Heartland Group", market: "NZX", status: "owned", notes: "Heartland Group Holdings." },
   { ticker: "CCR", company: "Credit Clear", market: "ASX", status: "owned", notes: "Smaller cap holding." },
   { ticker: "CSL", company: "CSL", market: "ASX", status: "owned", notes: "Healthcare / biotech holding." },
   { ticker: "MU", company: "Micron Technology", market: "NASDAQ", status: "watchlist", notes: "Current watchlist company." },
-  { ticker: "SIG", company: "Sigma Healthcare / Chemist Warehouse exposure", market: "ASX", status: "watchlist", notes: "Interested in adding if price drops." }
+  { ticker: "SIG", company: "Sigma Healthcare", market: "ASX", status: "watchlist", notes: "Interested in adding if price drops." }
 ];
