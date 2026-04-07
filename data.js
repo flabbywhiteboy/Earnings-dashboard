@@ -21,4 +21,6 @@ const stocks = [
   { ticker: "CSL", company: "CSL", market: "ASX", status: "owned", notes: "Healthcare / biotech holding." },
   { ticker: "MU", company: "Micron Technology", market: "NASDAQ", status: "watchlist", notes: "Current watchlist company." },
   { ticker: "SIG", company: "Sigma Healthcare", market: "ASX", status: "watchlist", notes: "Interested in adding if price drops." }
+  { ticker: "MQG", company: "Macquarie Group", market: "ASX", status: "owned", notes: "Core diversified financial holding." },
+  { ticker: "XRO", company: "Xero", market: "ASX", status: "owned", notes: "Cloud accounting software holding." },
 ];
