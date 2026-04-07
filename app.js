@@ -23,7 +23,9 @@ const marketSymbolMap = {
   "CSL": "ASX:CSL",
   "EUAD": "LSE:EUAD",
   "HGH": "NZX:HGH",
-  "SIG": "ASX:SIG"
+  "SIG": "ASX:SIG",
+  "MQG": "ASX:MQG",
+  "XRO": "ASX:XRO",
 };
 
 function getApiKey() {
