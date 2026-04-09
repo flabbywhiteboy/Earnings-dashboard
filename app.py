@@ -10,17 +10,37 @@ from zoneinfo import ZoneInfo
 
 import requests
 import yfinance as yf
-from flask import Flask, Response, abort, render_template_string, url_for
+from flask import Flask, Response, abort, jsonify, render_template_string, request, url_for
 
 APP_TITLE = "Susan's Earnings Dashboard"
 NZ_TZ = ZoneInfo("Pacific/Auckland")
 UTC = timezone.utc
+
 ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY", "").strip()
+EODHD_API_TOKEN = os.getenv("EODHD_API_TOKEN", "").strip()
 
 BASE_DIR = Path(__file__).resolve().parent
 HOLDINGS_PATH = BASE_DIR / "holdings.json"
 
 app = Flask(__name__)
+
+# CORS allowlist for your frontend
+ALLOWED_ORIGINS = {
+    "https://flabbywhiteboy.github.io",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+}
+
+# ASX/NZX mappings for your frontend watchlist
+SYMBOL_MAP = {
+    "A2M": "A2M.AU",
+    "CCR": "CCR.AU",
+    "CSL": "CSL.AU",
+    "HGH": "HGH.AU",
+    "MQG": "MQG.AU",
+    "SIG": "SIG.AU",
+    "XRO": "XRO.AU",
+}
 
 
 @dataclass
@@ -36,6 +56,50 @@ class Event:
     ir_page: Optional[str]
     notes: Optional[str] = None
     amount: Optional[str] = None
+
+
+def add_cors_headers(resp):
+    origin = request.headers.get("Origin", "")
+    if origin in ALLOWED_ORIGINS:
+        resp.headers["Access-Control-Allow-Origin"] = origin
+        resp.headers["Vary"] = "Origin"
+        resp.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        resp.headers["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    return resp
+
+
+@app.after_request
+def apply_cors(resp):
+    return add_cors_headers(resp)
+
+
+@app.route("/api/quote/<ticker>", methods=["GET", "OPTIONS"])
+def api_quote(ticker: str):
+    if request.method == "OPTIONS":
+        return add_cors_headers(Response(status=204))
+
+    ticker = ticker.upper().strip()
+    symbol = SYMBOL_MAP.get(ticker)
+
+    if not symbol:
+        return jsonify({"ok": False, "error": f"No EODHD symbol mapping for {ticker}"}), 404
+
+    price = fetch_eodhd_last_close(symbol)
+
+    if price is None:
+        return jsonify({"ok": False, "error": f"Could not fetch quote for {symbol}"}), 502
+
+    return jsonify(
+        {
+            "ok": True,
+            "ticker": ticker,
+            "sourceSymbol": symbol,
+            "quote": {
+                "c": price,
+                "dp": None,
+            },
+        }
+    )
 
 
 def load_holdings() -> List[Dict[str, Any]]:
@@ -88,6 +152,34 @@ def fetch_price(ticker: str) -> Optional[float]:
         pass
 
     return None
+
+
+def fetch_eodhd_last_close(symbol: str) -> Optional[float]:
+    if not EODHD_API_TOKEN:
+        return None
+
+    try:
+        resp = requests.get(
+            f"https://eodhd.com/api/eod/{symbol}",
+            params={
+                "filter": "last_close",
+                "api_token": EODHD_API_TOKEN,
+                "fmt": "json",
+            },
+            timeout=30,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+
+        if isinstance(data, (int, float)):
+            return float(data)
+
+        if isinstance(data, str):
+            return float(data)
+
+        return None
+    except Exception:
+        return None
 
 
 def alpha_vantage_text(params: Dict[str, str]) -> Optional[str]:
@@ -370,7 +462,7 @@ HTML = """
 
     {% if not has_api_key %}
       <div class="banner">
-        Add an Alpha Vantage API key in Railway later for automatic earnings and dividend dates.
+        Add an Alpha Vantage API key later for automatic earnings and dividend dates.
       </div>
     {% endif %}
 
@@ -500,3 +592,6 @@ def calendar_file(ticker: str, start: str):
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5000"))
     app.run(host="0.0.0.0", port=port)
+After you paste it
+
+Do not change anything else in app.py yet.
