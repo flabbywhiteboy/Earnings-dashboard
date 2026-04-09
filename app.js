@@ -1,3 +1,4 @@
+const STORAGE_KEY_EOD = "stock-watchlist-eodhd-key";
 const cardList = document.getElementById("cardList");
 const searchInput = document.getElementById("searchInput");
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -18,14 +19,14 @@ const FINNHUB_BASE = "https://finnhub.io/api/v1";
 const STORAGE_KEY = "stock-watchlist-finnhub-key";
 
 const marketSymbolMap = {
-  "A2M": "ASX:A2M",
-  "CCR": "ASX:CCR",
-  "CSL": "ASX:CSL",
-  "EUAD": "LSE:EUAD",
-  "HGH": "NZX:HGH",
-  "SIG": "ASX:SIG",
-  "MQG": "ASX:MQG",
-  "XRO": "ASX:XRO",
+  "A2M": "A2M.AU",
+  "CCR": "CCR.AU",
+  "CSL": "CSL.AU",
+  "HGH": "HGH.AU",
+  "MQG": "MQG.AU",
+  "SIG": "SIG.AU",
+  "XRO": "XRO.AU",
+  "EUAD": "LSE:EUAD"
 };
 
 function getApiKey() {
@@ -49,7 +50,16 @@ function saveApiKey() {
 function resolveSymbol(item) {
   return marketSymbolMap[item.ticker] || item.ticker;
 }
+function getEodKey() {
+  return localStorage.getItem(STORAGE_KEY_EOD) || "";
+}
 
+function saveEodKey() {
+  const key = prompt("Paste your EODHD API key:");
+  if (!key) return;
+  localStorage.setItem(STORAGE_KEY_EOD, key.trim());
+  setStatus("EODHD key saved.");
+}
 function formatCurrency(value) {
   if (value == null || Number.isNaN(value)) return "—";
   return new Intl.NumberFormat(undefined, {
@@ -174,7 +184,19 @@ async function fetchQuote(symbol, apiKey) {
   if (!res.ok) throw new Error(`Quote failed for ${symbol}`);
   return await res.json();
 }
+async function fetchEodQuote(symbol, apiKey) {
+  const url = `https://eodhd.com/api/eod/${symbol}?filter=last_close&api_token=${apiKey}&fmt=json`;
+  const res = await fetch(url);
 
+  if (!res.ok) throw new Error(`EODHD failed for ${symbol}`);
+
+  const price = await res.json();
+
+  return {
+    c: price,
+    dp: null
+  };
+}
 async function fetchEarnings(symbol, apiKey) {
   const today = new Date();
   const from = today.toISOString().slice(0, 10);
@@ -208,15 +230,21 @@ async function refreshLiveData() {
     const symbol = resolveSymbol(item);
 
     let quote = {};
-    let earningsDate = null;
-    let error = null;
+let earningsDate = null;
+let error = null;
 
-    try {
-      quote = await fetchQuote(symbol, apiKey);
-    } catch (err) {
-      error = `Quote failed: ${err.message}`;
-      console.error("Quote error for", symbol, err);
-    }
+try {
+  if (symbol.endsWith(".AU")) {
+    const eodKey = getEodKey();
+    if (!eodKey) throw new Error("No EODHD key saved");
+    quote = await fetchEodQuote(symbol, eodKey);
+  } else {
+    quote = await fetchQuote(symbol, apiKey);
+  }
+} catch (err) {
+  error = err.message;
+  console.error("Quote error for", symbol, err);
+}
 
     try {
       earningsDate = await fetchEarnings(symbol, apiKey);
