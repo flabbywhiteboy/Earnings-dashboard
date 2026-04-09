@@ -592,6 +592,4 @@ def calendar_file(ticker: str, start: str):
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5000"))
     app.run(host="0.0.0.0", port=port)
-After you paste it
 
-Do not change anything else in app.py yet.
