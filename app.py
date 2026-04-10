@@ -121,14 +121,15 @@ def api_quote(ticker: str):
             }), 502
 
         return jsonify({
-            "ok": True,
-            "ticker": ticker,
-            "sourceSymbol": symbol,
-            "quote": {
-                "c": price,
-                "dp": None
-            }
-        })
+    "ok": True,
+    "ticker": ticker,
+    "sourceSymbol": symbol,
+    "marker": "NEW_BACKEND_CODE_IS_RUNNING",
+    "quote": {
+        "c": price,
+        "dp": None
+    }
+})
 
     except Exception as e:
         return jsonify({
