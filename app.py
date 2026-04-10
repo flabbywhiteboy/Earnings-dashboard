@@ -84,22 +84,57 @@ def api_quote(ticker: str):
     if not symbol:
         return jsonify({"ok": False, "error": f"No EODHD symbol mapping for {ticker}"}), 404
 
-    price = fetch_eodhd_last_close(symbol)
+    if not EODHD_API_TOKEN:
+        return jsonify({"ok": False, "error": "EODHD_API_TOKEN is missing"}), 500
 
-    if price is None:
-        return jsonify({"ok": False, "error": f"Could not fetch quote for {symbol}"}), 502
+    try:
+        resp = requests.get(
+            f"https://eodhd.com/api/eod/{symbol}",
+            params={
+                "filter": "last_close",
+                "api_token": EODHD_API_TOKEN,
+                "fmt": "json",
+            },
+            timeout=30,
+        )
 
-    return jsonify(
-        {
+        raw_text = resp.text[:500]
+
+        if not resp.ok:
+            return jsonify({
+                "ok": False,
+                "error": f"EODHD HTTP {resp.status_code}",
+                "raw": raw_text
+            }), 502
+
+        data = resp.json()
+
+        if isinstance(data, (int, float)):
+            price = float(data)
+        elif isinstance(data, str):
+            price = float(data)
+        else:
+            return jsonify({
+                "ok": False,
+                "error": "Unexpected EODHD response type",
+                "raw": data
+            }), 502
+
+        return jsonify({
             "ok": True,
             "ticker": ticker,
             "sourceSymbol": symbol,
             "quote": {
                 "c": price,
-                "dp": None,
-            },
-        }
-    )
+                "dp": None
+            }
+        })
+
+    except Exception as e:
+        return jsonify({
+            "ok": False,
+            "error": repr(e)
+        }), 502
 
 
 def load_holdings() -> List[Dict[str, Any]]:
