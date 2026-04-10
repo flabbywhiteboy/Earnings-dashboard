@@ -156,6 +156,7 @@ def fetch_price(ticker: str) -> Optional[float]:
 
 def fetch_eodhd_last_close(symbol: str) -> Optional[float]:
     if not EODHD_API_TOKEN:
+        print("EODHD_API_TOKEN is missing")
         return None
 
     try:
@@ -168,7 +169,12 @@ def fetch_eodhd_last_close(symbol: str) -> Optional[float]:
             },
             timeout=30,
         )
+
+        print("EODHD status:", resp.status_code)
+        print("EODHD text:", resp.text[:500])
+
         resp.raise_for_status()
+
         data = resp.json()
 
         if isinstance(data, (int, float)):
@@ -177,8 +183,11 @@ def fetch_eodhd_last_close(symbol: str) -> Optional[float]:
         if isinstance(data, str):
             return float(data)
 
+        print("EODHD returned unexpected JSON type:", type(data), data)
         return None
-    except Exception:
+
+    except Exception as e:
+        print("EODHD fetch exception:", repr(e))
         return None
 
 
