@@ -154,7 +154,10 @@ function buildCard(item) {
       </div>
 
       <div class="notes">${item.notes}</div>
+      ${item.irUrl ? `<div class="card-actions"><a class="secondary-btn" href="${item.irUrl}" target="_blank" rel="noopener">IR Page</a></div>` : ""}
       <div class="small-note">Some ETFs, OTC lines and non-US tickers may have patchy coverage depending on the data provider and exchange mapping.</div>
+
+
     </article>
   `;
 }
