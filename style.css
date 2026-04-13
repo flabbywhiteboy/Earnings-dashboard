@@ -323,3 +323,9 @@ input {
   font-size: 13px;
   color: #666;
 }
+
+.last-updated {
+  margin: 8px 0 14px 0;
+  font-size: 13px;
+  color: #666;
+}
