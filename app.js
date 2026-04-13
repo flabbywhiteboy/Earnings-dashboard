@@ -227,6 +227,8 @@ async function refreshLiveData() {
 
   setStatus("Refreshing live prices and earnings dates...");
   refreshBtn.disabled = true;
+  refreshSpinner.classList.remove("hidden");
+  refreshBtnText.textContent = "Refreshing...";
 
   const nextLiveData = {};
 
@@ -275,8 +277,10 @@ try {
     await new Promise(r => setTimeout(r, 1200));
   }
 
-  refreshBtn.disabled = false;
-  setStatus("Refresh finished.");
+ refreshBtn.disabled = false;
+refreshSpinner.classList.add("hidden");
+refreshBtnText.textContent = "Refresh";
+setStatus("Refresh finished.");
 }
  
 searchInput.addEventListener("input", renderCards);
