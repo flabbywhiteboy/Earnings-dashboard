@@ -5,6 +5,7 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 const refreshBtn = document.getElementById("refreshBtn");
 const refreshSpinner = document.getElementById("refreshSpinner");
 const refreshBtnText = document.getElementById("refreshBtnText");
+const lastUpdated = document.getElementById("lastUpdated");
 const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
 const apiKeyInput = document.getElementById("apiKeyInput");
 const statusBar = document.getElementById("statusBar");
@@ -280,6 +281,10 @@ try {
  refreshBtn.disabled = false;
 refreshSpinner.classList.add("hidden");
 refreshBtnText.textContent = "Refresh";
+
+const now = new Date();
+lastUpdated.textContent = `Last updated: ${now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+
 setStatus("Refresh finished.");
 }
  
