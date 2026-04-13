@@ -264,3 +264,12 @@ input {
   .topbar, .api-row, .card-head { flex-direction: column; }
   .summary-grid, .metrics-grid { grid-template-columns: 1fr 1fr; }
 }
+
+.card-actions {
+  margin-top: 12px;
+}
+
+.card-actions a {
+  display: inline-block;
+  text-decoration: none;
+}
