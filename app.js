@@ -6,8 +6,9 @@ const refreshBtn = document.getElementById("refreshBtn");
 const refreshSpinner = document.getElementById("refreshSpinner");
 const refreshBtnText = document.getElementById("refreshBtnText");
 const lastUpdated = document.getElementById("lastUpdated");
-const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
 const apiKeyInput = document.getElementById("apiKeyInput");
+const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
+const apiSection = document.getElementById("apiSection");
 const statusBar = document.getElementById("statusBar");
 
 const totalCount = document.getElementById("totalCount");
@@ -46,8 +47,10 @@ function saveApiKey() {
     setStatus("Please paste your Finnhub API key first.");
     return;
   }
+
   localStorage.setItem(STORAGE_KEY, key);
   setStatus("API key saved on this device.");
+  apiSection.style.display = "none";
 }
 
 function resolveSymbol(item) {
@@ -310,6 +313,12 @@ refreshBtn.addEventListener("click", refreshLiveData);
 //  });
 // }
 
-apiKeyInput.value = getApiKey();
+const savedKey = getApiKey();
+apiKeyInput.value = savedKey;
+
+if (savedKey) {
+  apiSection.style.display = "none";
+}
+
 renderCards();
 
