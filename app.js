@@ -190,18 +190,22 @@ async function fetchQuote(symbol, apiKey) {
   if (!res.ok) throw new Error(`Quote failed for ${symbol}`);
   return await res.json();
 }
-async function fetchEodQuote(symbol, apiKey) {
-  const url = `https://eodhd.com/api/eod/${symbol}?filter=last_close&api_token=${apiKey}&fmt=json`;
+async function fetchEodQuote(ticker) {
+  const url = `https://earnings-dashboard-production.up.railway.app/api/quote/${encodeURIComponent(ticker)}`;
   const res = await fetch(url);
 
-  if (!res.ok) throw new Error(`EODHD failed for ${symbol}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || `Backend failed for ${ticker}`);
+  }
 
-  const price = await res.json();
+  const json = await res.json();
 
-  return {
-    c: price,
-    dp: null
-  };
+  if (!json.ok || !json.quote) {
+    throw new Error(json.error || `No quote returned for ${ticker}`);
+  }
+
+  return json.quote;
 }
 async function fetchEarnings(symbol, apiKey) {
   const today = new Date();
@@ -243,12 +247,10 @@ let error = null;
 
 try {
   if (symbol.endsWith(".AU")) {
-    const eodKey = getEodKey();
-    if (!eodKey) throw new Error("No EODHD key saved");
-    quote = await fetchEodQuote(symbol, eodKey);
-  } else {
-    quote = await fetchQuote(symbol, apiKey);
-  }
+  quote = await fetchEodQuote(item.ticker);
+} else {
+  quote = await fetchQuote(symbol, apiKey);
+}
 } catch (err) {
   error = err.message;
   console.error("Quote error for", symbol, err);
