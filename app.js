@@ -262,8 +262,8 @@ async function refreshLiveData() {
     const item = stocks[i];
     const symbol = resolveSymbol(item);
 
-    let quote = {};
-let earningsDate = null;
+   let quote = {};
+let earningsDateNZ = null;
 let error = null;
 
 try {
@@ -278,21 +278,21 @@ try {
 }
 
     try {
-     const rawEarningsDate = await fetchEarnings(symbol, apiKey);
-item.earningsDateNZ = convertToNZDate(rawEarningsDate);
-    } catch (err) {
-      error = error
-        ? error + ` | Earnings failed: ${err.message}`
-        : `Earnings failed: ${err.message}`;
-      console.error("Earnings error for", symbol, err);
-    }
+  const rawEarningsDate = await fetchEarnings(symbol, apiKey);
+  earningsDateNZ = convertToNZDate(rawEarningsDate);
+} catch (err) {
+  error = error
+    ? error + ` | Earnings failed: ${err.message}`
+    : `Earnings failed: ${err.message}`;
+  console.error("Earnings error for", symbol, err);
+}
 
-    nextLiveData[item.ticker] = {
-      quote,
-      earningsDate,
-      sourceSymbol: symbol,
-      error
-    };
+   nextLiveData[item.ticker] = {
+  quote,
+  earningsDateNZ,
+  sourceSymbol: symbol,
+  error
+};
 
     liveData = nextLiveData;
     renderCards();
