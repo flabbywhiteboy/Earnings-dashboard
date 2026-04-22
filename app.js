@@ -41,6 +41,18 @@ function setStatus(message) {
   statusBar.textContent = message;
 }
 
+function convertToNZDate(dateStr) {
+  if (!dateStr) return null;
+
+  // Assume US earnings are after market (around 9pm New York)
+  const usDate = new Date(dateStr + "T21:00:00-04:00");
+
+  const nzDate = new Date(
+    usDate.toLocaleString("en-US", { timeZone: "Pacific/Auckland" })
+  );
+
+  return nzDate;
+}
 function saveApiKey() {
   const key = apiKeyInput.value.trim();
   if (!key) {
@@ -117,15 +129,21 @@ function getMetricClass(value) {
 
 function buildCard(item) {
   const data = liveData[item.ticker] || {};
-  const earningsDate = data.earningsDate || null;
+  const earningsDate = data.earningsDateNZ || null;
   const dte = daysUntil(earningsDate);
 
-  let earningsText = "—";
-  if (earningsDate) {
-    earningsText = formatDate(earningsDate);
-    if (dte != null && dte >= 0) earningsText += ` (${dte}d)`;
-  }
+ let earningsText = "—";
+if (earningsDate) {
+  earningsText = earningsDate.toLocaleDateString("en-NZ", {
+    weekday: "short",
+    day: "numeric",
+    month: "short"
+  });
 
+  if (dte != null && dte >= 0) {
+    earningsText += ` (${dte}d)`;
+  }
+}
   const quote = data.quote || {};
   const current = quote.c;
   const pct = quote.dp;
@@ -260,7 +278,8 @@ try {
 }
 
     try {
-      earningsDate = await fetchEarnings(symbol, apiKey);
+     const rawEarningsDate = await fetchEarnings(symbol, apiKey);
+item.earningsDateNZ = convertToNZDate(rawEarningsDate);
     } catch (err) {
       error = error
         ? error + ` | Earnings failed: ${err.message}`
