@@ -1,4 +1,3 @@
-const STORAGE_KEY_EOD = "stock-watchlist-eodhd-key";
 const cardList = document.getElementById("cardList");
 const searchInput = document.getElementById("searchInput");
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -68,15 +67,10 @@ function saveApiKey() {
 function resolveSymbol(item) {
   return marketSymbolMap[item.ticker] || item.ticker;
 }
-function getEodKey() {
-  return localStorage.getItem(STORAGE_KEY_EOD) || "";
+
 }
 
-function saveEodKey() {
-  const key = prompt("Paste your EODHD API key:");
-  if (!key) return;
-  localStorage.setItem(STORAGE_KEY_EOD, key.trim());
-  setStatus("EODHD key saved.");
+
 }
 function formatCurrency(value) {
   if (value == null || Number.isNaN(value)) return "—";
