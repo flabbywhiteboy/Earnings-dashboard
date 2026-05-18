@@ -98,14 +98,11 @@ def api_quote(ticker: str):
             timeout=30,
         )
 
-        raw_text = resp.text[:500]
-
-        if not resp.ok:
-            return jsonify({
-                "ok": False,
-                "error": f"EODHD HTTP {resp.status_code}",
-                "raw": raw_text
-            }), 502
+       if not resp.ok:
+    return jsonify({
+        "ok": False,
+        "error": "ASX quote provider unavailable"
+    }), 502
 
         data = resp.json()
 
@@ -124,7 +121,7 @@ def api_quote(ticker: str):
     "ok": True,
     "ticker": ticker,
     "sourceSymbol": symbol,
-    "marker": "NEW_BACKEND_CODE_IS_RUNNING",
+   
     "quote": {
         "c": price,
         "dp": None
