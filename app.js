@@ -68,10 +68,6 @@ function resolveSymbol(item) {
   return marketSymbolMap[item.ticker] || item.ticker;
 }
 
-}
-
-
-}
 function formatCurrency(value) {
   if (value == null || Number.isNaN(value)) return "—";
   return new Intl.NumberFormat(undefined, {
