@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Susan's Stock Dashboard </title>
   <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css?v=18" />
+  <link rel="stylesheet" href="style.css?v=19" />
   <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
@@ -26,22 +26,19 @@
 
 <div id="lastUpdated" class="last-updated">Last updated: —</div>
     
-    <section class="panel" id="apiSection">
-      <div class="api-row">
-        <div class="field grow">
-          <label for="apiKeyInput">Finnhub API key</label>
-          <input id="apiKeyInput" type="password" placeholder="Paste your API key here" />
-        </div>
-        <button id="saveApiKeyBtn" class="secondary-btn">Save key</button>
-        </div>
-     
-            
-        
-      </div>
-      <p class="help-text">
-        Your key is stored only in this browser on this device. Nothing is sent anywhere except Finnhub when you refresh data.
-      </p>
-    </section>
+   <section class="panel" id="apiSection">
+  <div class="api-row">
+    <div class="field grow">
+      <label for="apiKeyInput">Finnhub API key</label>
+      <input id="apiKeyInput" type="password" placeholder="Paste your API key here" />
+    </div>
+    <button id="saveApiKeyBtn" class="secondary-btn">Save key</button>
+  </div>
+
+  <p class="help-text">
+    Your key is stored only in this browser on this device. Nothing is sent anywhere except Finnhub when you refresh data.
+  </p>
+</section>
 
     <section class="panel controls">
       <div class="field">
@@ -79,7 +76,7 @@
     <main id="cardList" class="card-list"></main>
   </div>
 
-  <script src="data.js?v=18"></script>
-<script src="app.js?v=18"></script>
+  <script src="data.js?v=19"></script>
+<script src="app.js?v=19"></script>
 </body>
 </html>
