@@ -181,11 +181,26 @@ if (earningsDate) {
 function renderCards() {
   const searchText = searchInput.value.trim().toLowerCase();
 
-  const filtered = stocks.filter(item => {
-    const matchesFilter = currentFilter === "all" ? true : item.status === currentFilter;
-    const searchable = `${item.company} ${item.ticker} ${item.market} ${item.notes}`.toLowerCase();
-    return matchesFilter && searchable.includes(searchText);
-  });
+ let filtered = stocks.filter(item => {
+  const matchesFilter = currentFilter === "all" ? true : item.status === currentFilter;
+  const searchable = `${item.company} ${item.ticker} ${item.market} ${item.notes}`.toLowerCase();
+  return matchesFilter && searchable.includes(searchText);
+});
+
+filtered = [...filtered].sort((a, b) => {
+  if (currentSort === "earnings") {
+    const aDate = liveData[a.ticker]?.earningsDateNZ;
+    const bDate = liveData[b.ticker]?.earningsDateNZ;
+
+    if (aDate && bDate) return aDate - bDate;
+    if (aDate && !bDate) return -1;
+    if (!aDate && bDate) return 1;
+
+    return a.company.localeCompare(b.company);
+  }
+
+  return a.company.localeCompare(b.company);
+});
 
   updateSummary(filtered);
 
@@ -305,6 +320,10 @@ setStatus("Refresh finished.");
 }
  
 searchInput.addEventListener("input", renderCards);
+sortSelect.addEventListener("change", () => {
+  currentSort = sortSelect.value;
+  renderCards();
+});
 
 filterButtons.forEach(button => {
   button.addEventListener("click", () => {
