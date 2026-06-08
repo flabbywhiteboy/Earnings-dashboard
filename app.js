@@ -1,5 +1,6 @@
 const cardList = document.getElementById("cardList");
 const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortSelect");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const refreshBtn = document.getElementById("refreshBtn");
 const refreshSpinner = document.getElementById("refreshSpinner");
