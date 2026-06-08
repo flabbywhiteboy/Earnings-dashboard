@@ -17,6 +17,7 @@ const watchlistCount = document.getElementById("watchlistCount");
 const upcomingCount = document.getElementById("upcomingCount");
 
 let currentFilter = "all";
+let currentSort = "alphabetical";
 let liveData = {};
 
 const FINNHUB_BASE = "https://finnhub.io/api/v1";
